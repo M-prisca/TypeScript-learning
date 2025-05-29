@@ -1,3 +1,8 @@
+// String Types mini-challenge
+// Write a function that will display the most recent reviewers name next to the review total,
+// making sure to assign a type to the parameter, to prevent unwanted behaviour.
+
+
 const reviewTotalDisplay = document.querySelector('#reviews')
 
 const reviews = [
