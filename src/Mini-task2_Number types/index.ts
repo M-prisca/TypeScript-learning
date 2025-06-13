@@ -3,9 +3,8 @@
 // making sure to assign a type to the parameter, to prevent unwanted behaviour.
 
 
-const reviewTotalDisplay = document.querySelector('#reviews')
-
-const reviews = [
+const reviewTotalDisplayed = document.querySelector('#reviews') as HTMLElement
+const review = [
     {
         name: 'Sheia',
         stars: 5,
@@ -28,8 +27,7 @@ const reviews = [
 
 // Solution 
 
-//function showReviewTotal (value: number) { for typescript
-function showReviewTotal (value) {
+function showReviewTotal (value: number) { 
     reviewTotalDisplay.innerHTML = 'Review total :' + value.toString()
 }
 
