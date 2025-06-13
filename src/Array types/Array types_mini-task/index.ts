@@ -38,12 +38,12 @@ const reviews : {
     },
 ]
 
-function showReviewTotal(value: number, reviewer: string, isLoyalty: boolean) {
+function showReviewTotals(value: number, reviewer: string, isLoyalty: boolean) {
     const iconDisplay = isLoyalty ? '⭐' : ''
     reviewTotalDisplay.innerHTML = 'review total ' + value.toString() + '| last reviewed by ' + reviewer + ' ' + iconDisplay
 }
 
-showReviewTotal(reviews.length, reviews[0].name, reviews[0].loyaltyUser)
+showReviewTotals(reviews.length, reviews[0].name, reviews[0].loyaltyUser)
 
 // The TS code for the object type
 
