@@ -20,8 +20,8 @@ const review = [
         date: '27-03-2021'
     },
 ];
-function showReviewTotal(value) {
+function showReviewedTotal(value) {
     reviewTotalDisplay.innerHTML = 'Review total :' + value.toString();
 }
-showReviewTotal(reviews.length);
+showReviewedTotal(reviews.length);
 //# sourceMappingURL=index.js.map

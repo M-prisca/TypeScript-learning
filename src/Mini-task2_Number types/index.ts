@@ -27,9 +27,9 @@ const review = [
 
 // Solution 
 
-function showReviewTotal (value: number) { 
+function showReviewedTotal (value: number) { 
     reviewTotalDisplay.innerHTML = 'Review total :' + value.toString()
 }
 
-showReviewTotal(reviews.length)
+showReviewedTotal(reviews.length)
  
