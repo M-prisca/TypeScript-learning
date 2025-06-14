@@ -5,11 +5,17 @@
 // we pass to our populateUser function, so that we can be aware of
 // errors in our user objects in the future.
 
-const returningUserDisplay = document.querySelector('#returning-user')
-const userNameDisplay = document.querySelector('#user')
-const reviewTotalDisplay = document.querySelector('#reviews')
+const returningUser = document.querySelector('#returning-user') as HTMLElement
+const userName = document.querySelector('#user') as HTMLElement
+const TotalDisplay = document.querySelector('#reviews') as HTMLElement
 
-const reviews = [
+const revie:{
+    name : string,
+    stars: number,
+    loyaltyUser :boolean,
+    date:string
+
+}[]= [
     {
         name: 'Sheia',
         stars: 5,
@@ -30,29 +36,29 @@ const reviews = [
     },
 ]
 
-//function showReviewTotal(value: number, reviewer: string, isLoyalty: boolean) {
-function showReviewTotal(value, reviewer, isLoyalty) {
+function ReviewTotal(value: number, reviewer: string, isLoyalty: boolean) {
+
     const iconDisplay = isLoyalty ? '⭐' : ''
     reviewTotalDisplay.innerHTML = 'Review total ' + value.toString() + '| last reviewed by ' + reviewer + ' ' + iconDisplay
 }
 
-showReviewTotal(reviews.length, reviews[0].name, reviews[0].loyaltyUser)
+ReviewTotal(reviews.length, reviews[0].name, reviews[0].loyaltyUser)
 
 
 
 
-const you = {
+const mine = {
     userName: 'Prisca',
     isReturning: true,
 }
 
-//function populateUser(isReturning : boolean, userName: string ) {
-function populateUser(isReturning, userName ) {
+function popUser(isReturning : boolean, userName: string ) {
+
     if (isReturning){
         returningUserDisplay.innerHTML = 'back'
     }
     userNameDisplay.innerHTML = userName
 }
 
-populateUser(you.isReturning, you.userName)
+popUser(mine.isReturning, mine.userName)
 
