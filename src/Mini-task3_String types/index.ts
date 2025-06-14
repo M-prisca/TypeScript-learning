@@ -3,9 +3,14 @@
 // making sure to assign a type to the parameter, to prevent unwanted behaviour.
 
 
-const reviewTotalDisplay = document.querySelector('#reviews')
+const reviewTotal = document.querySelector('#reviews') as HTMLElement
 
-const reviews = [
+const rev :{
+    name :string,
+    stars :number,
+    loyaltyUser: boolean,
+    date: string
+}[] = [
     {
         name: 'Sheia',
         stars: 5,
@@ -28,10 +33,10 @@ const reviews = [
 
 // Solution 
 
-//function showReviewTotal (value: number, reviewer: string) { for typescript
-function showReviewTotal (value, reviewer) {
-    reviewTotalDisplay.innerHTML = 'Review total :' + value.toString() + '| Last reviewed by ' + reviewer
+function showReview (value: number, reviewer: string) { 
+
+    reviewTotal.innerHTML = 'Review total :' + value.toString() + '| Last reviewed by ' + reviewer
 }
 
-showReviewTotal(reviews.length, reviews[0].name)
+showReview(reviews.length, reviews[0].name)
  
