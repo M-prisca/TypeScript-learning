@@ -2,18 +2,16 @@
 // Based on what we discussed we need to make up our Property Objects and array,
 // can you create that array, making sure to assign the correct Types?
 
-import { showReviewTotal, populateUser } from './utils'
-// let isOpen: boolean
-let isOpen;
+
+let isOpe: boolean;
 
 // Reviews
-// const reviews : { 
-//     name: string; 
-//     stars: number; 
-//     loyaltyUser: boolean; 
-//     date: string
-//     }[] 
-const reviews = [
+const revise : { 
+    name: string; 
+    stars: number; 
+    loyaltyUser: boolean; 
+    date: string
+    }[] = [
     {
         name: 'Sheia',
         stars: 5,
@@ -34,15 +32,14 @@ const reviews = [
     },
 ]
 
-// // User
-// const you: {
-//     firstName: string;
-//     lastName: string;
-//     isReturning: boolean;
-//     age: number;
-//     stayedAt: string[]
-// } 
-const you = {
+// User
+const your: {
+    firstName: string;
+    lastName: string;
+    isReturning: boolean;
+    age: number;
+    stayedAt: string[]
+} = {
     firstName: 'Bobby',
     lastName: 'Brown',
     isReturning: true,
@@ -51,20 +48,19 @@ const you = {
 }
 
 //Properties
-// const properties : {
-//     image: string;
-//     title: string;
-//     price: number;
-//     location: {
-//         firstLine: string;
-//         city: string;
-//         code: number;
-//         country: string;
-//     };
-//     contact: string;
-//     isAvailable: boolean;
-// }[] 
-const properties = [
+const properties : {
+    image: string;
+    title: string;
+    price: number;
+    location: {
+        firstLine: string;
+        city: string;
+        code: number;
+        country: string;
+    };
+    contact: string;
+    isAvailable: boolean;
+}[]  = [
     {
         image: '',
         title: 'Colombian Shack',
