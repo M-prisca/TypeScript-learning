@@ -6,9 +6,9 @@
 // : booolean
 
 
-const reviewTotalDisplay = document.querySelector('#reviews')
+const reviewDisplay = document.querySelector('#reviews')
 
-const reviews = [
+const revi = [
     {
         name: 'Sheia',
         stars: 5,
@@ -31,12 +31,11 @@ const reviews = [
 
 // Solution 
 
-//function showReviewTotal (value: number, reviewer: string, isLoyalty: boolean) { for typescript
-function showReviewTotal (value, reviewer,isLoyalty ) {
+function showTotal (value: number, reviewer: string, isLoyalty: boolean) { 
 
     const iconDisplay = isLoyalty ? '⭐' : ''
     reviewTotalDisplay.innerHTML = 'Review total :' + value.toString() + '| Last reviewed by ' + reviewer + ' ' + iconDisplay
 }
 
-showReviewTotal(reviews.length, reviews[0].name,reviews[0].loyaltyUser)
+showTotal(reviews.length, reviews[0].name,reviews[0].loyaltyUser)
  
