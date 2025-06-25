@@ -52,4 +52,36 @@ const maleStudents = filterByGender(students, Gender.Male);
 console.log(maleStudents.map(s => s.fullName));
 const otherStudents = filterByGender(students, Gender.Other);
 console.log(otherStudents.map(s => s.fullName));
+function formatStudentID(id) {
+    if (typeof id.id === "number") {
+        return `ID-${id.id.toString().padStart(4, "0")}`;
+    }
+    else if (typeof id.id === "string") {
+        return `ID-${id.id.toLocaleUpperCase()}`;
+    }
+    else {
+        throw new Error("Invalid ID type");
+    }
+}
+console.log(formatStudentID({ id: 25 }));
+console.log(formatStudentID({ id: "ab12" }));
+function getPerformanceLevel(score) {
+    if (score >= 85) {
+        return "Excellent";
+    }
+    else if (score >= 60) {
+        return "Average";
+    }
+    else {
+        return "Poor";
+    }
+}
+console.log(getPerformanceLevel(92));
+console.log(getPerformanceLevel(75));
+console.log(getPerformanceLevel(50));
+students.forEach(student => {
+    const avg = student.getAverageGrade();
+    const level = getPerformanceLevel(avg);
+    console.log(`${student.fullName} -Avg: ${avg} -Perfomance: ${level}`);
+});
 //# sourceMappingURL=index.js.map

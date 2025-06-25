@@ -3,7 +3,7 @@
 
 
 type StudentID={
-id: number;
+id: number  | string;
 }// The StudentID type is a custom type that represents a student's ID.
 // It is an object with a single property id of type number.
 
@@ -92,3 +92,40 @@ console.log(maleStudents.map(s=>s.fullName));
  
 const otherStudents = filterByGender(students, Gender.Other);
 console.log(otherStudents.map(s => s.fullName));
+
+// Function to format the StudentID based on its type
+// It checks if the id is a number or a string and formats it accordingly.
+function formatStudentID(id :StudentID): string{
+  if (typeof id.id === "number"){
+    return `ID-${id.id.toString().padStart(4,"0")}`;
+  }else if(typeof id.id ==="string"){
+    return `ID-${id.id.toLocaleUpperCase()}`
+  }else{
+    throw new Error("Invalid ID type")
+  }  
+}
+console.log(formatStudentID({id:25}));
+console.log(formatStudentID({id:"ab12"}));
+
+// Function to get the performance level based on the average grade
+// It returns a string indicating the performance level based on the score.
+type PerformanceLevel = "Excellent"|"Average"|"Poor"
+ function getPerformanceLevel(score: number):PerformanceLevel{
+   if(score >= 85){
+     return "Excellent";
+   }else if(score>=60){
+     return "Average";
+   }else{
+     return "Poor";
+   }
+ }
+console.log(getPerformanceLevel(92));
+console.log(getPerformanceLevel(75));
+console.log(getPerformanceLevel(50));
+
+// Displaying the average grade and performance level for each student
+students.forEach(student =>{
+  const avg =student.getAverageGrade();
+  const level = getPerformanceLevel(avg);
+  console.log(`${student.fullName} -Avg: ${avg} -Perfomance: ${level}`);
+});
