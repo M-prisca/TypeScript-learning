@@ -129,3 +129,22 @@ students.forEach(student =>{
   const level = getPerformanceLevel(avg);
   console.log(`${student.fullName} -Avg: ${avg} -Perfomance: ${level}`);
 });
+
+// Function to find the student with the maximum average grade
+// It takes an array of students and a key selector function to determine
+// the maximum based on the average grade.
+// It returns the student with the highest average grade.
+function findMax<T>(items: T[], keySelector: (item: T) => number): T {
+  if (items.length === 0) {
+    throw new Error("Array is empty");
+  }
+
+  return items.reduce((maxItem, currentItem) => {
+    return keySelector(currentItem) > keySelector(maxItem) ? currentItem : maxItem;
+  });
+}
+
+const topStudent = findMax(students, student => student.getAverageGrade());
+
+console.log(`Top Student: ${topStudent.fullName} with average score of ${topStudent.getAverageGrade()}`);
+

@@ -84,4 +84,14 @@ students.forEach(student => {
     const level = getPerformanceLevel(avg);
     console.log(`${student.fullName} -Avg: ${avg} -Perfomance: ${level}`);
 });
+function findMax(items, keySelector) {
+    if (items.length === 0) {
+        throw new Error("Array is empty");
+    }
+    return items.reduce((maxItem, currentItem) => {
+        return keySelector(currentItem) > keySelector(maxItem) ? currentItem : maxItem;
+    });
+}
+const topStudent = findMax(students, student => student.getAverageGrade());
+console.log(`Top Student: ${topStudent.fullName} with average score of ${topStudent.getAverageGrade()}`);
 //# sourceMappingURL=index.js.map
