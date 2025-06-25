@@ -47,6 +47,11 @@ class StudentRecord implements Student{
   // Method to add a grade to the student's record.
   // It takes a subjectGrade tuple as an argument and adds it to the grades array.
   addGrade(grade: subjectGrade): void{
+    const [subject, score]= grade;
+    
+    if(score < 0|| score > 100){
+      throw new Error (`Invlid score for ${score} in ${subject}. Score must be between 0 nad 100.`)
+    }
     this.grades.push(grade);
   }
     // Method to get the average grade of the student.
@@ -71,14 +76,18 @@ const students: StudentRecord[] = [
   new StudentRecord({ id: 3 }, "Alex", 21, Gender.Other),
 ];
 // Adding grades to students
+try{
 students[0].addGrade(["Math", 90]);
-students[0].addGrade(["Science", 95]);
+students[0].addGrade(["Science", 105]);
 
 students[1].addGrade(["Math", 70]);
 students[1].addGrade(["Science", 75]);
 
 students[2].addGrade(["Math", 85]);
 students[2].addGrade(["Science", 80]);
+}catch(error){
+  console.log(`Error adding for ${students[0].fullName}: ${(error as Error).message}`)
+}
 
 function filterByGender(students: StudentRecord[], gender: Gender): StudentRecord[] {
   return students.filter(student => student.gender === gender);

@@ -16,6 +16,10 @@ class StudentRecord {
             this._email = email;
     }
     addGrade(grade) {
+        const [subject, score] = grade;
+        if (score < 0 || score > 100) {
+            throw new Error(`Invlid score for ${score} in ${subject}. Score must be between 0 nad 100.`);
+        }
         this.grades.push(grade);
     }
     getAverageGrade() {
@@ -37,12 +41,17 @@ const students = [
     new StudentRecord({ id: 2 }, "John", 22, Gender.Male, "john@example.com"),
     new StudentRecord({ id: 3 }, "Alex", 21, Gender.Other),
 ];
-students[0].addGrade(["Math", 90]);
-students[0].addGrade(["Science", 95]);
-students[1].addGrade(["Math", 70]);
-students[1].addGrade(["Science", 75]);
-students[2].addGrade(["Math", 85]);
-students[2].addGrade(["Science", 80]);
+try {
+    students[0].addGrade(["Math", 90]);
+    students[0].addGrade(["Science", 105]);
+    students[1].addGrade(["Math", 70]);
+    students[1].addGrade(["Science", 75]);
+    students[2].addGrade(["Math", 85]);
+    students[2].addGrade(["Science", 80]);
+}
+catch (error) {
+    console.log(`Error adding for ${students[0].fullName}: ${error.message}`);
+}
 function filterByGender(students, gender) {
     return students.filter(student => student.gender === gender);
 }
