@@ -18,7 +18,7 @@ class StudentRecord {
     addGrade(grade) {
         const [subject, score] = grade;
         if (score < 0 || score > 100) {
-            throw new Error(`Invlid score for ${score} in ${subject}. Score must be between 0 nad 100.`);
+            throw new Error(`Invalid score for ${subject}: ${score}. Score must be between 0 and 100.`);
         }
         this.grades.push(grade);
     }
@@ -35,72 +35,81 @@ class StudentRecord {
         }
         this._email = value;
     }
+    getGrades() {
+        return this.grades;
+    }
 }
-const students = [
-    new StudentRecord({ id: 1 }, "Prisca", 20, Gender.Female, "prisca@example.com"),
-    new StudentRecord({ id: 2 }, "John", 22, Gender.Male, "john@example.com"),
-    new StudentRecord({ id: 3 }, "Alex", 21, Gender.Other),
-];
-try {
-    students[0].addGrade(["Math", 90]);
-    students[0].addGrade(["Science", 105]);
-    students[1].addGrade(["Math", 70]);
-    students[1].addGrade(["Science", 75]);
-    students[2].addGrade(["Math", 85]);
-    students[2].addGrade(["Science", 80]);
-}
-catch (error) {
-    console.log(`Error adding for ${students[0].fullName}: ${error.message}`);
-}
-function filterByGender(students, gender) {
-    return students.filter(student => student.gender === gender);
-}
-const femaleStudents = filterByGender(students, Gender.Female);
-console.log(femaleStudents.map(s => s.fullName));
-const maleStudents = filterByGender(students, Gender.Male);
-console.log(maleStudents.map(s => s.fullName));
-const otherStudents = filterByGender(students, Gender.Other);
-console.log(otherStudents.map(s => s.fullName));
 function formatStudentID(id) {
     if (typeof id.id === "number") {
         return `ID-${id.id.toString().padStart(4, "0")}`;
     }
     else if (typeof id.id === "string") {
-        return `ID-${id.id.toLocaleUpperCase()}`;
+        return `ID-${id.id.toUpperCase()}`;
     }
     else {
         throw new Error("Invalid ID type");
     }
 }
-console.log(formatStudentID({ id: 25 }));
-console.log(formatStudentID({ id: "ab12" }));
 function getPerformanceLevel(score) {
-    if (score >= 85) {
+    if (score >= 85)
         return "Excellent";
-    }
-    else if (score >= 60) {
+    else if (score >= 60)
         return "Average";
-    }
-    else {
+    else
         return "Poor";
+}
+function findMax(items, keySelector) {
+    if (items.length === 0)
+        throw new Error("Array is empty");
+    return items.reduce((maxItem, currentItem) => keySelector(currentItem) > keySelector(maxItem) ? currentItem : maxItem);
+}
+const students = [
+    new StudentRecord({ id: 101 }, "Prisca", 20, Gender.Female, "prisca@example.com"),
+    new StudentRecord({ id: 102 }, "John", 22, Gender.Male, "john@example.com"),
+    new StudentRecord({ id: 103 }, "Alex", 21, Gender.Other),
+    new StudentRecord({ id: 104 }, "Linda", 23, Gender.Female, "linda@example.com"),
+    new StudentRecord({ id: 105 }, "Mike", 24, Gender.Male),
+];
+const studentGrades = [
+    [students[0], [["Math", 95], ["Science", 90]]],
+    [students[1], [["Math", 70], ["Science", 75]]],
+    [students[2], [["Math", 88], ["Science", 82]]],
+    [students[3], [["Math", 100], ["Science", 100]]],
+    [students[4], [["Math", 59], ["Science", 45]]],
+];
+for (const [student, grades] of studentGrades) {
+    for (const grade of grades) {
+        try {
+            student.addGrade(grade);
+        }
+        catch (error) {
+            console.error(`Error adding grade for ${student.fullName}: ${error.message}`);
+        }
     }
 }
-console.log(getPerformanceLevel(92));
-console.log(getPerformanceLevel(75));
-console.log(getPerformanceLevel(50));
-students.forEach(student => {
+for (const student of students) {
+    console.log("-------------");
+    console.log(`Name   : ${student.fullName}`);
+    console.log(`ID     : ${formatStudentID(student.id)}`);
+    console.log(`Gender : ${Gender[student.gender]}`);
+    console.log("Grades :");
+    student.getGrades().forEach(([subject, score]) => {
+        console.log(`  ${subject}: ${score}`);
+    });
     const avg = student.getAverageGrade();
     const level = getPerformanceLevel(avg);
-    console.log(`${student.fullName} -Avg: ${avg} -Perfomance: ${level}`);
-});
-function findMax(items, keySelector) {
-    if (items.length === 0) {
-        throw new Error("Array is empty");
-    }
-    return items.reduce((maxItem, currentItem) => {
-        return keySelector(currentItem) > keySelector(maxItem) ? currentItem : maxItem;
-    });
+    console.log(`Average    : ${avg}`);
+    console.log(`Performance: ${level}`);
 }
-const topStudent = findMax(students, student => student.getAverageGrade());
-console.log(`Top Student: ${topStudent.fullName} with average score of ${topStudent.getAverageGrade()}`);
+console.log("\n🎓 Excellent Students:");
+students
+    .filter(s => getPerformanceLevel(s.getAverageGrade()) === "Excellent")
+    .forEach(s => console.log(`- ${s.fullName}`));
+console.log("\n Students Sorted by Average Grade:");
+const sortedByAvg = [...students].sort((a, b) => b.getAverageGrade() - a.getAverageGrade());
+sortedByAvg.forEach(s => console.log(`${s.fullName} - Avg: ${s.getAverageGrade()} - ${getPerformanceLevel(s.getAverageGrade())}`));
+const topStudent = findMax(students, s => s.getAverageGrade());
+console.log(`\n🏆 Top Student: ${topStudent.fullName}`);
+console.log(`Average: ${topStudent.getAverageGrade()}`);
+console.log(`Performance: ${getPerformanceLevel(topStudent.getAverageGrade())}`);
 //# sourceMappingURL=index.js.map
